@@ -15,6 +15,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
     {:eex,  "new/config/prod.secret.exs",                    "config/prod.secret.exs"},
     {:eex,  "new/config/test.exs",                           "config/test.exs"},
     {:eex,  "new/lib/application_name.ex",                   "lib/application_name.ex"},
+    {:eex,  "new/lib/mix/tasks/digest.ex",                   "lib/mix/tasks/digest.ex"},
     {:eex,  "new/lib/application_name/endpoint.ex",          "lib/application_name/endpoint.ex"},
     {:keep, "new/test/channels",                             "test/channels"},
     {:keep, "new/test/controllers",                          "test/controllers"},
@@ -104,7 +105,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
   It expects the path of the project as argument.
 
-      mix phoenix_webpack.new PATH [--module MODULE] [--app APP]
+      mix phoenix_webpack_gen.new PATH [--module MODULE] [--app APP]
 
   A project at the given PATH  will be created. The
   application name and module name will be retrieved
@@ -136,15 +137,15 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
   ## Examples
 
-      mix phoenix_webpack.new hello_world
+      mix phoenix_webpack_gen.new hello_world
 
   Is equivalent to:
 
-      mix phoenix_webpack.new hello_world --module HelloWorld
+      mix phoenix_webpack_gen.new hello_world --module HelloWorld
 
   Without webpack:
 
-      mix phoenix_webpack.new ~/Workspace/hello_world --no-webpack
+      mix phoenix_webpack_gen.new ~/Workspace/hello_world --no-webpack
 
   """
   @switches [dev: :boolean, webpack: :boolean, ecto: :boolean,
@@ -160,7 +161,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
     case argv do
       [] ->
-        Mix.Task.run "help", ["phoenix_webpack.new"]
+        Mix.Task.run "help", ["phoenix_webpack_gen.new"]
       [path|_] ->
         app = opts[:app] || Path.basename(Path.expand(path))
         check_application_name!(app, !!opts[:app])

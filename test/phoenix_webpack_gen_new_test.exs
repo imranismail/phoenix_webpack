@@ -410,7 +410,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
           Mix.Tasks.PhoenixWebpackGen.New.run []
         end
 
-      assert output =~ "mix phoenix_webpack.new"
+      assert output =~ "mix phoenix_webpack_gen.new"
       assert output =~ "Creates a new Phoenix project with Webpack asset build tool."
     end
   end
