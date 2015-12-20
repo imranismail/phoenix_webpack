@@ -308,8 +308,8 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
   end
 
   defp install_webpack(install?) do
-    maybe_cmd "npm install && node node_modules/.bin/webpack --progress --colors",
-              File.exists?("webpack-config.js"), install? && System.find_executable("npm")
+    maybe_cmd "npm install && node_modules/.bin/webpack",
+              File.exists?("webpack.config.babel.js"), install? && System.find_executable("npm")
   end
 
   defp install_mix(install?) do
