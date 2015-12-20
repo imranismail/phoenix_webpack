@@ -1,4 +1,4 @@
-## mix phoenix_webpack.new
+## mix phoenix_webpack_gen.new
 
 Provides `phoenix_webpack_gen.new` installer as an archive. To build and install it locally:
 
