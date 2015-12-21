@@ -71,8 +71,9 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
       # Webpack
       assert_file "photo_blog/.gitignore", "/node_modules"
       assert_file "photo_blog/.babelrc", "es2015"
-      assert_file "photo_blog/webpack.config.babel.js", "web/static"
-      assert_file "photo_blog/config/dev.exs", "watchers: [node:"
+      assert_file "photo_blog/webpack.config.js", "web/static"
+      assert_file "photo_blog/webpack.devserver.js", "http://localhost:4000"
+      assert_file "photo_blog/config/dev.exs", "watchers: [npm:"
       assert_file "photo_blog/web/static/assets/favicon.ico"
       assert_file "photo_blog/web/static/assets/images/phoenix.png"
       assert_file "photo_blog/web/static/css/app.css"
@@ -236,7 +237,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
           assert file =~ "lockfile: \"../../mix.lock\""
         end
 
-        assert_file "photo_blog/webpack.config.babel.js", fn(file) ->
+        assert_file "photo_blog/webpack.config.js", fn(file) ->
           assert file =~ ~s["deps/phoenix_html/web/static/js/phoenix_html.js"]
           assert file =~ ~s["deps/phoenix/web/static/js/phoenix.js"]
         end
