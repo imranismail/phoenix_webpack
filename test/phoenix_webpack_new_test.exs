@@ -1,6 +1,6 @@
 Code.require_file "mix_helper.exs", __DIR__
 
-defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
+defmodule Mix.Tasks.PhoenixWebpack.NewTest do
   use ExUnit.Case
   import MixHelper
 
@@ -16,13 +16,13 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   end
 
   test "returns the version" do
-    Mix.Tasks.PhoenixWebpackGen.New.run(["-v"])
-    assert_received {:mix_shell, :info, ["PhoenixWebpackGen v" <> _]}
+    Mix.Tasks.PhoenixWebpack.New.run(["-v"])
+    assert_received {:mix_shell, :info, ["PhoenixWebpack v" <> _]}
   end
 
   test "new with defaults" do
     in_tmp "new with defaults", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run([@app_name])
+      Mix.Tasks.PhoenixWebpack.New.run([@app_name])
 
       assert_file "photo_blog/README.md"
       assert_file "photo_blog/mix.exs", fn file ->
@@ -131,7 +131,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
 
   test "new without defaults" do
     in_tmp "new without defaults", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run([@app_name, "--no-html", "--no-webpack", "--no-ecto"])
+      Mix.Tasks.PhoenixWebpack.New.run([@app_name, "--no-html", "--no-webpack", "--no-ecto"])
 
       # No Webpack
       refute File.read!("photo_blog/.gitignore") |> String.contains?("/node_modules")
@@ -174,9 +174,9 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
       assert_file "photo_blog/mix.exs", &refute(&1 =~ ~r":phoenix_html")
       assert_file "photo_blog/mix.exs", &refute(&1 =~ ~r":phoenix_live_reload")
       assert_file "photo_blog/lib/photo_blog/endpoint.ex",
-                  &refute(&1 =~ ~r"PhoenixWebpackGen.LiveReloader")
+                  &refute(&1 =~ ~r"PhoenixWebpack.LiveReloader")
       assert_file "photo_blog/lib/photo_blog/endpoint.ex",
-                  &refute(&1 =~ ~r"PhoenixWebpackGen.LiveReloader.Socket")
+                  &refute(&1 =~ ~r"PhoenixWebpack.LiveReloader.Socket")
       assert_file "photo_blog/web/views/error_view.ex", ~r".json"
       assert_file "photo_blog/web/router.ex", &refute(&1 =~ ~r"pipeline :browser")
     end
@@ -184,7 +184,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
 
   test "new with binary_id" do
     in_tmp "new with binary_id", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run([@app_name, "--binary-id"])
+      Mix.Tasks.PhoenixWebpack.New.run([@app_name, "--binary-id"])
 
       assert_file "photo_blog/web/web.ex", fn file ->
         assert file =~ ~r/@primary_key {:id, :binary_id, autogenerate: true}/
@@ -197,7 +197,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
 
   test "new with uppercase" do
     in_tmp "new with uppercase", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run(["photoBlog"])
+      Mix.Tasks.PhoenixWebpack.New.run(["photoBlog"])
 
       assert_file "photoBlog/README.md"
 
@@ -215,7 +215,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new with path, app and module" do
     in_tmp "new with path, app and module", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--app", @app_name, "--module", "PhoteuxBlog"])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path, "--app", @app_name, "--module", "PhoteuxBlog"])
 
       assert_file "custom_path/.gitignore"
       assert_file "custom_path/mix.exs", ~r/app: :photo_blog/
@@ -230,7 +230,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
       File.write! "mix.exs", umbrella_mixfile_contents
       File.mkdir! "apps"
       File.cd! "apps", fn ->
-        Mix.Tasks.PhoenixWebpackGen.New.run([@app_name])
+        Mix.Tasks.PhoenixWebpack.New.run([@app_name])
 
         assert_file "photo_blog/mix.exs", fn(file) ->
           assert file =~ "deps_path: \"../../deps\""
@@ -252,7 +252,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new with mysql adapter" do
     in_tmp "new with mysql adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--database", "mysql"])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path, "--database", "mysql"])
 
       assert_file "custom_path/mix.exs", ~r/:mariaex/
       assert_file "custom_path/config/dev.exs", [~r/Ecto.Adapters.MySQL/, ~r/username: "root"/, ~r/password: ""/]
@@ -271,7 +271,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new with tds adapter" do
     in_tmp "new with tds adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--database", "mssql"])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path, "--database", "mssql"])
 
       assert_file "custom_path/mix.exs", ~r/:tds_ecto/
       assert_file "custom_path/config/dev.exs", ~r/Tds.Ecto/
@@ -290,7 +290,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new with sqlite adapter" do
     in_tmp "new with sqlite adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--database", "sqlite"])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path, "--database", "sqlite"])
 
       assert_file "custom_path/mix.exs", ~r/:sqlite_ecto/
 
@@ -321,7 +321,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new with mongodb adapter" do
     in_tmp "new with mongodb adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--database", "mongodb"])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path, "--database", "mongodb"])
 
       assert_file "custom_path/mix.exs", ~r/:mongodb_ecto/
 
@@ -352,7 +352,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
   test "new defaults to pg adapter" do
     in_tmp "new defaults to pg adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
-      Mix.Tasks.PhoenixWebpackGen.New.run([project_path])
+      Mix.Tasks.PhoenixWebpack.New.run([project_path])
 
       assert_file "custom_path/mix.exs", ~r/:postgrex/
       assert_file "custom_path/config/dev.exs", [~r/Ecto.Adapters.Postgres/, ~r/username: "postgres"/, ~r/password: "postgres"/, ~r/hostname: "localhost"/]
@@ -372,34 +372,34 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
     in_tmp "new with invalid database adapter", fn ->
       project_path = Path.join(File.cwd!, "custom_path")
       assert_raise Mix.Error, ~s(Unknown database "invalid"), fn ->
-        Mix.Tasks.PhoenixWebpackGen.New.run([project_path, "--database", "invalid"])
+        Mix.Tasks.PhoenixWebpack.New.run([project_path, "--database", "invalid"])
       end
     end
   end
 
   test "new with invalid args" do
     assert_raise Mix.Error, ~r"Application name must start with a letter and ", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["007invalid"]
+      Mix.Tasks.PhoenixWebpack.New.run ["007invalid"]
     end
 
     assert_raise Mix.Error, ~r"Application name must start with a letter and ", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["valid", "--app", "007invalid"]
+      Mix.Tasks.PhoenixWebpack.New.run ["valid", "--app", "007invalid"]
     end
 
     assert_raise Mix.Error, ~r"Module name must be a valid Elixir alias", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["valid", "--module", "not.valid"]
+      Mix.Tasks.PhoenixWebpack.New.run ["valid", "--module", "not.valid"]
     end
 
     assert_raise Mix.Error, ~r"Module name \w+ is already taken", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["string"]
+      Mix.Tasks.PhoenixWebpack.New.run ["string"]
     end
 
     assert_raise Mix.Error, ~r"Module name \w+ is already taken", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["valid", "--app", "mix"]
+      Mix.Tasks.PhoenixWebpack.New.run ["valid", "--app", "mix"]
     end
 
     assert_raise Mix.Error, ~r"Module name \w+ is already taken", fn ->
-      Mix.Tasks.PhoenixWebpackGen.New.run ["valid", "--module", "String"]
+      Mix.Tasks.PhoenixWebpack.New.run ["valid", "--module", "String"]
     end
   end
 
@@ -408,10 +408,10 @@ defmodule Mix.Tasks.PhoenixWebpackGen.NewTest do
 
       output =
         capture_io fn ->
-          Mix.Tasks.PhoenixWebpackGen.New.run []
+          Mix.Tasks.PhoenixWebpack.New.run []
         end
 
-      assert output =~ "mix phoenix_webpack_gen.new"
+      assert output =~ "mix phoenix_webpack.new"
       assert output =~ "Creates a new Phoenix project with Webpack asset build tool."
     end
   end

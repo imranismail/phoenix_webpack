@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.PhoenixWebpackGen.New do
+defmodule Mix.Tasks.PhoenixWebpack.New do
   use Mix.Task
   import Mix.Generator
 
@@ -106,7 +106,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
   It expects the path of the project as argument.
 
-      mix phoenix_webpack_gen.new PATH [--module MODULE] [--app APP]
+      mix phoenix_webpack.new PATH [--module MODULE] [--app APP]
 
   A project at the given PATH  will be created. The
   application name and module name will be retrieved
@@ -138,15 +138,15 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
   ## Examples
 
-      mix phoenix_webpack_gen.new hello_world
+      mix phoenix_webpack.new hello_world
 
   Is equivalent to:
 
-      mix phoenix_webpack_gen.new hello_world --module HelloWorld
+      mix phoenix_webpack.new hello_world --module HelloWorld
 
   Without webpack:
 
-      mix phoenix_webpack_gen.new ~/Workspace/hello_world --no-webpack
+      mix phoenix_webpack.new ~/Workspace/hello_world --no-webpack
 
   """
   @switches [dev: :boolean, webpack: :boolean, ecto: :boolean,
@@ -154,7 +154,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
              binary_id: :boolean, html: :boolean]
 
   def run([version]) when version in ~w(-v --version) do
-    Mix.shell.info "PhoenixWebpackGen v#{@version}"
+    Mix.shell.info "PhoenixWebpack v#{@version}"
   end
 
   def run(argv) do
@@ -162,7 +162,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
 
     case argv do
       [] ->
-        Mix.Task.run "help", ["phoenix_webpack_gen.new"]
+        Mix.Task.run "help", ["phoenix_webpack.new"]
       [path|_] ->
         app = opts[:app] || Path.basename(Path.expand(path))
         check_application_name!(app, !!opts[:app])
@@ -321,7 +321,7 @@ defmodule Mix.Tasks.PhoenixWebpackGen.New do
   defp print_webpack_info do
     Mix.shell.info """
 
-    PhoenixWebpackGen uses an optional assets build tool called webpack
+    PhoenixWebpack uses an optional assets build tool called webpack
     that requires node.js and npm. Installation instructions for
     node.js, which includes npm, can be found at http://nodejs.org.
 

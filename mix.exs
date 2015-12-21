@@ -1,8 +1,8 @@
-defmodule PhoenixWebpackGen.New.Mixfile do
+defmodule PhoenixWebpack.New.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenix_webpack_gen,
+    [app: :phoenix_webpack,
      version: "0.0.1",
      elixir: "~> 1.1"]
   end
