@@ -1,6 +1,6 @@
 // Webpack automatically concatenates all files in your
 // watched paths. Those paths can be configured at
-// in "webpack.config.babel.js".
+// in "webpack.config.js".
 //
 // However, those files will only be executed if
 // explicitly imported. The only exception are files
