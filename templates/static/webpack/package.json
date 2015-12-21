@@ -1,10 +1,6 @@
 {
   "repository": {},
   "dependencies": {},
-  "scripts": {
-    "compile": "webpack --colors --progress",
-    "server": "node ./webpack.devserver.js"
-  },
   "devDependencies": {
     "babel-core": "^6.3.21",
     "babel-loader": "^6.2.0",

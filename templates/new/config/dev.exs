@@ -12,7 +12,7 @@ config :<%= application_name %>, <%= application_module %>.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  watchers: <%= if webpack do %>[npm: ["run", "server"]]<% else %>[]<% end %>
+  watchers: <%= if webpack do %>[node: ["./webpack.devserver.js"]]<% else %>[]<% end %>
 
 <%= if html do %># Watch static and templates for browser reloading.
 config :<%= application_name %>, <%= application_module %>.Endpoint,
