@@ -73,14 +73,14 @@ defmodule Mix.Tasks.PhoenixWebpack.NewTest do
       assert_file "photo_blog/.babelrc", "es2015"
       assert_file "photo_blog/webpack.config.js", "web/static"
       assert_file "photo_blog/webpack.devserver.js", "http://localhost:4000"
-      assert_file "photo_blog/config/dev.exs", "watchers: [npm:"
+      assert_file "photo_blog/config/dev.exs", "watchers: [node:"
       assert_file "photo_blog/web/static/assets/favicon.ico"
       assert_file "photo_blog/web/static/assets/images/phoenix.png"
       assert_file "photo_blog/web/static/css/app.css"
       assert_file "photo_blog/web/static/js/app.js",
-                  ~s[import socket from "./socket"]
+                  ~s[import socket from './socket']
       assert_file "photo_blog/web/static/js/socket.js",
-                  ~s[import {Socket} from "phoenix"]
+                  ~s[import {Socket} from 'phoenix']
 
       refute File.exists? "photo_blog/priv/static/css/app.css"
       refute File.exists? "photo_blog/priv/static/js/phoenix.js"
@@ -238,13 +238,13 @@ defmodule Mix.Tasks.PhoenixWebpack.NewTest do
         end
 
         assert_file "photo_blog/webpack.config.js", fn(file) ->
-          assert file =~ ~s["deps/phoenix_html/web/static/js/phoenix_html.js"]
-          assert file =~ ~s["deps/phoenix/web/static/js/phoenix.js"]
+          assert file =~ ~s['deps/phoenix_html/web/static/js/phoenix_html.js']
+          assert file =~ ~s['deps/phoenix/web/static/js/phoenix.js']
         end
 
-        assert_file "photo_blog/web/static/js/socket.js", ~s["phoenix"]
+        assert_file "photo_blog/web/static/js/socket.js", ~s['phoenix']
 
-        assert_file "photo_blog/web/static/js/app.js", ~s["phoenix_html"]
+        assert_file "photo_blog/web/static/js/app.js", ~s['phoenix_html']
       end
     end
   end

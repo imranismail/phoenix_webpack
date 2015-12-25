@@ -1,6 +1,6 @@
 // Webpack automatically concatenates all files in your
 // watched paths. Those paths can be configured at
-// in "webpack.config.js".
+// in 'webpack.config.js'.
 //
 // However, those files will only be executed if
 // explicitly imported. The only exception are files
@@ -10,11 +10,11 @@
 // Import dependencies
 //
 // If you no longer want to use a dependency, remember
-import "phoenix_html"
+import 'phoenix_html'
 
 // Import local files
 //
 // Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+// paths './socket' or full ones 'web/static/js/socket'.
 
-// import socket from "./socket"
+// import socket from './socket'
