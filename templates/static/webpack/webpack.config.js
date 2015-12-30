@@ -8,7 +8,7 @@ var PROD   = ENV === 'prod'
 var PATHS  = {
   web: Path.join(__dirname, 'web/static'),
   priv: Path.join(__dirname, 'priv/static'),
-  public: 'http://localhost:4001/'
+  public: 'http://localhost:4002/'
 }
 
 var CONFIG = {

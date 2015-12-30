@@ -3,7 +3,7 @@ var WebpackDevServer = require('webpack-dev-server')
 var CONFIG           = require('./webpack.config')
 
 new WebpackDevServer(Webpack(CONFIG), {
-  contentBase: 'http://localhost:4001',
+  contentBase: 'http://localhost:4002',
   publicPath: CONFIG.output.publicPath,
   hot: true,
   historyApiFallback: true,
@@ -14,9 +14,9 @@ new WebpackDevServer(Webpack(CONFIG), {
     chunks: false,
     colors: true
   }
-}).listen(4001, '0.0.0.0', function (err, result) {
+}).listen(4002, '0.0.0.0', function (err, result) {
   if (err) console.error(err)
-  console.log('[info]', 'Running Webpack development server on http://localhost:4001')
+  console.log('[info]', 'Running Webpack development server using http on port 4002')
 })
 
 // Exit on end of STDIN
