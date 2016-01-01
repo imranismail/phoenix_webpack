@@ -10,12 +10,12 @@ defmodule Mix.Tasks.<%= application_module %>.Server do
 
   def update_node_args(new_args \\ []) do
     updated_env =
-      Application.get_env(:lancer, <%= application_module %>.Endpoint)
+      Application.get_env(:<%= application_name %>, <%= application_module %>.Endpoint)
       |> Keyword.update!(:watchers, fn([{:node, args}]) ->
            [node: args ++ new_args]
          end)
 
-    Application.put_env(:lancer,
+    Application.put_env(:<%= application_name %>,
                         <%= application_module %>.Endpoint,
                         updated_env,
                         persistent: true)

@@ -16,6 +16,7 @@ defmodule Mix.Tasks.PhoenixWebpack.New do
     {:eex,  "new/config/test.exs",                           "config/test.exs"},
     {:eex,  "new/lib/application_name.ex",                   "lib/application_name.ex"},
     {:eex,  "new/lib/mix/tasks/digest.ex",                   "lib/mix/tasks/digest.ex"},
+    {:eex,  "new/lib/mix/tasks/server.ex",                   "lib/mix/tasks/server.ex"},
     {:eex,  "new/lib/application_name/endpoint.ex",          "lib/application_name/endpoint.ex"},
     {:keep, "new/test/channels",                             "test/channels"},
     {:keep, "new/test/controllers",                          "test/controllers"},
