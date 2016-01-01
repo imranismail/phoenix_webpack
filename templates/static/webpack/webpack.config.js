@@ -72,18 +72,20 @@ var CONFIG = {
   ]
 }
 
-if (!PROD) {
+if (PROD) {
+  // Uglify JS
+  CONFIG.plugins.push(new Webpack.optimize.UglifyJsPlugin())
+} else {
   // Enable sourcemap
   CONFIG.devtool = 'source-map'
 
-  // add HMR
+  // Add HMR
   CONFIG.plugins.push(new Webpack.HotModuleReplacementPlugin(),
                       new Webpack.NoErrorsPlugin())
 
-  // add HMR to entry
-  CONFIG.entry.unshift(
-    'webpack-dev-server/client?' + PATHS.public,
-    'webpack/hot/only-dev-server')
+  // Add HMR to entry
+  CONFIG.entry.unshift('webpack-dev-server/client?' + PATHS.public,
+                       'webpack/hot/only-dev-server')
 }
 
 module.exports = CONFIG
