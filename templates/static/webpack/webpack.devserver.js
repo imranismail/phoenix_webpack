@@ -3,7 +3,7 @@ var WebpackDevServer = require('webpack-dev-server')
 var CONFIG           = require('./webpack.config')
 
 var SERVER_CONFIG    = {
-  hot: process.argv.some(val =>  val == '--hot'),
+  hot: true,
   contentBase: 'http://localhost:4002',
   publicPath: CONFIG.output.publicPath,
   historyApiFallback: true,
@@ -19,7 +19,7 @@ var SERVER_CONFIG    = {
 new WebpackDevServer(Webpack(CONFIG), SERVER_CONFIG)
   .listen(4002, '0.0.0.0', function (err, result) {
     if (err) console.error(err)
-    console.log('[info]', `Running Webpack development server${SERVER_CONFIG.hot ? ' with HMR ' : ' '}using http on port 4002`)
+    console.log('[info]', `Running Webpack development server hot using http on port 4002`)
 })
 
 // Exit on end of STDIN

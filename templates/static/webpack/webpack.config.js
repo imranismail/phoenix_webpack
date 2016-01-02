@@ -85,7 +85,7 @@ if (PROD) {
 
   // Add HMR to entry
   CONFIG.entry.unshift('webpack-dev-server/client?' + PATHS.public,
-                       'webpack/hot/only-dev-server')
+                       'webpack/hot/dev-server')
 }
 
 module.exports = CONFIG
